@@ -1,0 +1,23 @@
+{
+  "name": "opti-mongo",
+  "version": "1.0.0",
+  "description": "Biblioteca para gerenciamento de conexões ao MongoDB com ajuste dinâmico do pool de conexões.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon test.js",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mongodb",
+    "database",
+    "client",
+    "connection",
+    "pool"
+  ],
+  "author": "Giovanni Cabral",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^4.1.3",
+    "nodemon": "^3.1.0"
+  }
+}
