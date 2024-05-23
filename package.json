@@ -1,6 +1,6 @@
 {
   "name": "opti-mongo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Biblioteca para gerenciamento de conexões ao MongoDB com ajuste dinâmico do pool de conexões.",
   "main": "index.js",
   "scripts": {
