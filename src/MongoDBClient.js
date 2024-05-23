@@ -6,6 +6,7 @@ class MongoDBClient {
     this.poolSize = poolSize;
     this.client = null;
     this.dbName = dbName;
+    this.operations = 0;
   }
 
   async connect(options = {
@@ -21,6 +22,11 @@ class MongoDBClient {
 
   async executeOperation(operation, ...args) {
     try {
+      this.operations++;
+      if (this.operations == 10) {
+        this.operations = 0
+        await this.monitorAndAdjustPoolSize()
+      }
       return await operation(...args);
     } catch (error) {
       console.error('Operation failed:', error);
@@ -117,7 +123,7 @@ class MongoDBClient {
   }
 
   async monitorAndAdjustPoolSize() {
-    const metrics = await this.client.db().command({ serverStatus: 1 });
+    const metrics = await this.client.db(this.dbName).command({ serverStatus: 1 });
 
     const connectionsCurrent = metrics.connections.current;
     const connectionsAvailable = metrics.connections.available;
@@ -131,10 +137,14 @@ class MongoDBClient {
   }
 
   async adjustPoolSize(newPoolSize) {
-    if (newPoolSize !== this.poolSize) {
-      this.poolSize = newPoolSize;
-      await this.client.close();
-      await this.connect();
+    try {
+      if (newPoolSize !== this.poolSize) {
+        this.poolSize = newPoolSize;
+        await this.client.close();
+        await this.connect();
+      }
+    } catch (error) {
+      console.error('Error adjusting pool size:', error);
     }
   }
 

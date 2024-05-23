@@ -29,10 +29,6 @@ class MongoInstancesManager {
     return this.instances
   }
 
-  async adjustMetrics() {
-
-  }
-
   async closeAll() {
     await Promise.all(this.instances.map((i) => i.close()));
   }
