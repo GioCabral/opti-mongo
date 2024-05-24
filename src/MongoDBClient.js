@@ -7,6 +7,7 @@ class MongoDBClient {
     this.client = null;
     this.dbName = dbName;
     this.operations = 0;
+    this.db = null;
   }
 
   async connect(options = {
@@ -16,6 +17,7 @@ class MongoDBClient {
   }) {
     if (!this.client) {
       this.client = new MongoClient(this.uri, options);
+      this.client.db(this.dbName);
     }
     return this.client.connect();
   }
