@@ -17,7 +17,7 @@
   "author": "Giovanni Cabral",
   "license": "MIT",
   "dependencies": {
-    "mongodb": "^4.1.3",
+    "mongodb": "^6.6.2",
     "nodemon": "^3.1.0"
   }
 }

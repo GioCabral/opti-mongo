@@ -10,6 +10,7 @@ class MongoDBClient {
   }
 
   async connect(options = {
+    maxPoolSize: this.poolSize,
     serverSelectionTimeoutMS: 5000,
     waitQueueTimeoutMS: 5000
   }) {
