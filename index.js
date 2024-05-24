@@ -1,2 +1,2 @@
-const MongoInstancesManager = require('./src/MongoInstanceManager');
-module.exports = MongoInstancesManager;
+const MongoDBClient = require('./src/MongoDBClient');
+module.exports = MongoDBClient;
